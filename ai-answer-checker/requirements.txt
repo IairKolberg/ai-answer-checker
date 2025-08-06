@@ -1,0 +1,8 @@
+click
+httpx
+ruamel.yaml
+pydantic
+flask
+sentence-transformers
+scikit-learn
+numpy

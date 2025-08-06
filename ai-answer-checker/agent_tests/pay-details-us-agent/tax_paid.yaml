@@ -1,0 +1,22 @@
+variables:
+  currentPayDetailsId: "2000019"
+  employeeId: "3687270792413839383"
+
+user_input: "on 31 of August 2024 how mych taxes did I pay?"
+
+expected_answer: |
+  On your August 31, 2024 payslip, you paid a total of **$1,100.00** in taxes for that pay period.
+
+  This is shown as "Federal Tax: $1,100.00" on your payslip.
+  No state or local taxes are listed for this period—only federal tax is shown.
+
+comparison_method: substring
+required_words: ["Federal Tax", "$1,100.00", "August", "31", "2024"]
+
+tool_stubs:
+  paySlips:
+    - request:
+        payDetailsIds: [999999]
+        region: US
+        yearToDate: true
+      response_file: paySlipsSummary/999999

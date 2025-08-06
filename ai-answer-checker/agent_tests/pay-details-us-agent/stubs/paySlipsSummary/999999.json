@@ -1,0 +1,133 @@
+[
+  {
+    "year": 2025,
+    "months": [
+      {
+        "displayName": "April",
+        "cycles": [
+          {
+            "payDetailsStatus": {
+              "status": "success",
+              "errorMessage": null,
+              "validationErrorMessage": null
+            },
+            "payDate": "2025-04-18T00:00:00",
+            "payPeriodStartDate": "2025-03-29T00:00:00",
+            "payPeriodEndDate": "2025-04-11T23:59:59",
+            "checkDateName": "April 18",
+            "paySummaryDetails": {
+              "id": 2000059,
+              "totalNetPay": 1120.13,
+              "currency": "USD"
+            }
+          },
+          {
+            "payDetailsStatus": {
+              "status": "success",
+              "errorMessage": null,
+              "validationErrorMessage": null
+            },
+            "payDate": "2025-04-04T00:00:00",
+            "payPeriodStartDate": "2025-03-15T00:00:00",
+            "payPeriodEndDate": "2025-03-28T23:59:59",
+            "checkDateName": "April 4",
+            "paySummaryDetails": {
+              "id": 2000038,
+              "totalNetPay": 2287.63,
+              "currency": "USD"
+            }
+          }
+        ]
+      },
+      {
+        "displayName": "March",
+        "cycles": [
+          {
+            "payDetailsStatus": {
+              "status": "success",
+              "errorMessage": null,
+              "validationErrorMessage": null
+            },
+            "payDate": "2025-03-21T00:00:00",
+            "payPeriodStartDate": "2025-03-01T00:00:00",
+            "payPeriodEndDate": "2025-03-14T23:59:59",
+            "checkDateName": "March 21",
+            "paySummaryDetails": {
+              "id": 2000023,
+              "totalNetPay": 1543.35,
+              "currency": "USD"
+            }
+          },
+          {
+            "payDetailsStatus": {
+              "status": "success",
+              "errorMessage": null,
+              "validationErrorMessage": null
+            },
+            "payDate": "2025-03-07T00:00:00",
+            "payPeriodStartDate": "2025-02-15T00:00:00",
+            "payPeriodEndDate": "2025-02-28T23:59:59",
+            "checkDateName": "March 7",
+            "paySummaryDetails": {
+              "id": 2000019,
+              "totalNetPay": 1028.2,
+              "currency": "USD"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "year": 2024,
+    "months": [
+      {
+        "displayName": "August",
+        "cycles": [
+          {
+            "payDetailsStatus": {
+              "status": "success",
+              "errorMessage": null,
+              "validationErrorMessage": null
+            },
+            "payDate": "2024-08-31T00:00:00",
+            "payPeriodStartDate": "2024-08-01T00:00:00",
+            "payPeriodEndDate": "2024-08-31T23:59:59",
+            "checkDateName": "August 31",
+            "paySummaryDetails": {
+              "id": 2000061,
+              "totalNetPay": 3850,
+              "currency": "USD"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "year": 2021,
+    "months": [
+      {
+        "displayName": "March",
+        "cycles": [
+          {
+            "payDetailsStatus": {
+              "status": "success",
+              "errorMessage": null,
+              "validationErrorMessage": null
+            },
+            "payDate": "2021-03-07T00:00:00",
+            "payPeriodStartDate": "2021-02-15T00:00:00",
+            "payPeriodEndDate": "2021-02-28T23:59:59",
+            "checkDateName": "March 7",
+            "paySummaryDetails": {
+              "id": 2000032,
+              "totalNetPay": 2056.4,
+              "currency": "USD"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

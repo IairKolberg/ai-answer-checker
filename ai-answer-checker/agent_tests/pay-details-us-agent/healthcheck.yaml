@@ -1,0 +1,6 @@
+variables: {}
+user_input: "ping"
+expected_answer: |
+  Service is healthy and responding
+comparison_method: exact
+# No tool_stubs needed for healthcheck - this is a simple connectivity test

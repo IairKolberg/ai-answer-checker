@@ -1,0 +1,217 @@
+{
+    "name": "payDetailsMCP",
+    "toolkits": [
+      {
+        "name": "mainTool",
+        "description": "Endpoints for navigating employee payslips. First call the summary endpoint to obtain the relevant payDetailsId, then call the details endpoint for the full payslip breakdown.",
+        "requiresAIFeature": "PAYROLL",
+        "tools": [
+          {
+            "name": "getPayDetailsSummary",
+            "description": "Retrieve the timeline of an employee's payslips. Returns every pay cycle grouped by year and month, and for each cycle a `paySummaryDetails` object containing the payslip's id, pay date, and high-level figures (gross, net, taxes, etc.). Use the returned `paySummaryDetails.id` when calling `getPayDetails` to load the full payslip for that cycle.",
+            "method": "GET",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "employeeId": {
+                  "type": "string",
+                  "description": "The unique identifier of the employee to get pay details summary for"
+                }
+              },
+              "required": ["employeeId"],
+              "description": "Input parameters for getting pay details summary"
+            },
+            "output_schema": {
+              "type": "object",
+              "properties": {
+                "docsLink": {
+                  "type": ["string", "null"],
+                  "description": "Optional link to documentation for employee pay details"
+                },
+                "paySummary": {
+                  "type": "array",
+                  "description": "Array of pay details grouped by year",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "year": {
+                        "type": "integer",
+                        "description": "The year for this pay summary"
+                      },
+                      "months": {
+                        "type": "array",
+                        "description": "Array of pay details grouped by month",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "displayName": {
+                              "type": "string",
+                              "description": "Display name for the month"
+                            },
+                            "cycles": {
+                              "type": "array",
+                              "description": "Array of pay details for pay cycles in this month",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "payDetailsStatus": {
+                                    "type": "object",
+                                    "description": "Status and error information for this pay cycle",
+                                    "properties": {
+                                      "status": {
+                                        "type": "string",
+                                        "enum": ["success", "error", "validationError", "empty"],
+                                        "description": "Status of the pay details processing"
+                                      },
+                                      "errorMessage": {
+                                        "type": ["string", "null"],
+                                        "description": "Error message if status is error"
+                                      },
+                                      "validationErrorMessage": {
+                                        "type": ["string", "null"],
+                                        "description": "Validation error message if status is validationError"
+                                      }
+                                    },
+                                    "required": ["status"]
+                                  },
+                                  "payDate": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Date when payment was made"
+                                  },
+                                  "payPeriodStartDate": {
+                                    "type": ["string", "null"],
+                                    "format": "date-time",
+                                    "description": "Start date of the pay period"
+                                  },
+                                  "payPeriodEndDate": {
+                                    "type": ["string", "null"],
+                                    "format": "date-time",
+                                    "description": "End date of the pay period"
+                                  },
+                                  "checkDateName": {
+                                    "type": ["string", "null"],
+                                    "description": "Display name for the check date"
+                                  },
+                                  "paySummaryDetails": {
+                                    "type": ["object", "null"],
+                                    "description": "Summary of pay details including net pay",
+                                    "properties": {
+                                      "id": {
+                                        "type": ["integer", "null"],
+                                        "description": "Unique identifier for this pay detail entry"
+                                      },
+                                      "totalNetPay": {
+                                        "type": ["number", "null"],
+                                        "description": "Total net pay amount"
+                                      },
+                                      "currency": {
+                                        "type": ["string", "null"],
+                                        "enum": ["USD", "CAD", "EUR", "GBP"],
+                                        "description": "Currency code for the pay amount"
+                                      }
+                                    }
+                                  }
+                                },
+                                "required": ["payDetailsStatus", "payDate"]
+                              }
+                            }
+                          },
+                          "required": ["displayName", "cycles"]
+                        }
+                      }
+                    },
+                    "required": ["year", "months"]
+                  }
+                }
+              }
+            },
+            "executionUrl": "/employees/{employeeId}/summary",
+            "operationType": "read",
+            "annotations": {},
+            "accessConfiguration": {
+              "minimumAccessScope": [],
+              "availableViaPublicApi": false
+            }
+          },
+          {
+            "name": "getPayDetails",
+            "description": "Retrieve the complete payslip for a given payDetailsId. The response contains every grid—earnings, taxes, deductions, benefits, time-off—with each row's current and ytd amounts, plus overall totals and totalsYTD. Pass the paySummaryDetails.id obtained from a prior getPayDetailsSummary call as the payDetailsId parameter.",
+            "method": "GET",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "payDetailsId": {
+                  "type": "integer",
+                  "description": "The unique identifier of the pay details entry to retrieve"
+                }
+              },
+              "required": ["payDetailsId"],
+              "description": "Input parameters for getting detailed pay information"
+            },
+            "output_schema": {
+              "type": "object",
+              "properties": {
+                "paycheckName": {
+                  "type": "string",
+                  "description": "Name or description of the paycheck"
+                },
+                "payPeriodStartDate": {
+                  "type": ["string", "null"],
+                  "format": "date-time",
+                  "description": "Start date of the pay period"
+                },
+                "payPeriodEndDate": {
+                  "type": ["string", "null"],
+                  "format": "date-time",
+                  "description": "End date of the pay period"
+                },
+                "gridsContainTotals": {
+                  "type": ["boolean", "null"],
+                  "description": "Whether the grids contain total information",
+                  "default": true
+                },
+                "totals": {
+                  "type": ["object", "null"],
+                  "description": "Current pay period totals with percentage breakdowns"
+                },
+                "totalsYTD": {
+                  "type": ["object", "null"],
+                  "description": "Year-to-date totals with percentage breakdowns"
+                },
+                "earnings": {
+                  "type": ["object", "null"],
+                  "description": "Earnings grid information with rows of earnings entries"
+                },
+                "taxes": {
+                  "type": ["object", "null"],
+                  "description": "Taxes grid information with rows of tax entries"
+                },
+                "deductions": {
+                  "type": ["object", "null"],
+                  "description": "Deductions grid information with rows of deduction entries"
+                },
+                "timeOff": {
+                  "type": ["object", "null"],
+                  "description": "Time off grid information with rows of time off entries"
+                },
+                "benefits": {
+                  "type": ["object", "null"],
+                  "description": "Benefits grid information with rows of benefits entries"
+                }
+              },
+              "required": ["paycheckName"],
+              "description": "Detailed pay information including earnings, taxes, deductions, and benefits"
+            },
+            "executionUrl": "/{payDetailsId}",
+            "operationType": "read",
+            "annotations": {},
+            "accessConfiguration": {
+              "minimumAccessScope": [],
+              "availableViaPublicApi": false
+            }
+          }
+        ]
+      }
+    ]
+  }

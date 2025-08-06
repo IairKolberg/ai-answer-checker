@@ -1,0 +1,27 @@
+variables:
+  currentPayDetailsId: 2000019
+  employeeId:        "3687270792413839383"
+
+user_input: "on March 7 2025 I had a deduction, what is it?"
+
+expected_answer: |
+  On your March 7, 2025 payslip, your deduction is labeled as 401k Contribution: $51.80. This is a pre-tax retirement savings deduction, meaning the amount was set aside from your pay before taxes were calculated.
+
+semantic_threshold: 0.80
+comparison_method: semantic
+
+tool_stubs:
+  getPayDetails:           # ← Updated tool name from MCP definition
+    - request:
+        payDetailsId: 2000019    # Note: single ID, not array
+      response_file: payslips/999999.json
+      
+    - request:               # ➋ second call (previous period)
+        payDetailsId: 2000038
+      response_file: payslips/999998.json
+
+  getPayDetailsSummary:    # ← Updated tool name from MCP definition  
+    - request:
+        employeeId: "3687270792413839383"   # Note: string, not array
+      response_file: paySlipsSummary/999999.json
+

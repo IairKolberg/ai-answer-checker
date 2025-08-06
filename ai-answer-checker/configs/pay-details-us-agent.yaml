@@ -1,0 +1,16 @@
+# Configuration for US Payroll AI Agent
+
+dev:
+  agent_name: pay-details-us-agent
+  base_url: "http://localhost:9007"
+  endpoint_path: "/agent/pay-details-us-agent-v1"
+  timeout_seconds: 30
+  max_retries: 2
+  retry_delay_seconds: 1.0
+  headers:
+    Content-Type: "application/json"
+    Accept: "application/json"
+    X-Client: "ai-answer-checker"
+    X-Bob-Key: "your-bob-key-here"
+  cookie_header: "PLAY_LANG=en-GB; BOB_SESS_ID=eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhdXRoX3Nlc3Npb24iLCJjb21wYW55SWQiOjQsImVtcGxveWVlSWQiOiIzNjg3MjcwNTk4NTM2MzMxMjY1IiwiZGlzcGxheU5hbWUiOiJHaXQgUG9kIiwidHlwZSI6ImVtcGxveWVlIiwiZW1haWwiOiJpYWlyLmtvbGJlcmcrZ2l0cG9kQGhpYm9iLmlvIiwibm9uY2UiOiIyNjM5ZmNmYy05MTQ5LTQ5NGMtYTUwNC1iMTA2YWU0YzU1NmIiLCJleHAiOjE3NTQ0MTc0NDV9.bomMVl61CCA3V-HrE2u2rsC9fTeSPG-99g2sbiixQYXswE4jCfMOUBphmAwsakzPHtqvQE1d6e-J1Wqb2F6nUlrnq7V09Umj1a5RLrDwjadmI7G5qbkGCUP4iUaIUDyaQiyKV6e1cMXXCn2FrVxCgge5AszaEKgl9QxIIoHA47V8a-z2eMenk78szq27JFaRjR-EO390BqIuW2jo5NkO4e3uvZ3y7VzYkN54TKshTzRmvow3pZtL_wSgdiiw00HuzqDdI5SZZySjWW2f3IJ-fmauL_E8tHopDXQp2lRLgrT3xUcG_qMDgQ3bS9jAxYGr7QqK3dGtaSsgphBy6--uzQ"
+  verify_ssl: true

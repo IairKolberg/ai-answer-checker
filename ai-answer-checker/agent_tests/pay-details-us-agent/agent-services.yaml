@@ -1,0 +1,8 @@
+# Agent-level service stubs that are required for ALL tests in this agent
+# These stubs will be automatically loaded whenever any test from this agent runs
+
+agent_stubs:
+  # MCP Service Definition - called first to get available tools
+  api/mcp/service/payDetailsMCP:    
+    - request: {}                   
+      response_file: mcp/payDetailsMCP.json

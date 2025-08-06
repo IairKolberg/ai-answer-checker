@@ -1,0 +1,22 @@
+{
+  "employeeId": 123456,
+  "year": 2024,
+  "yearToDateTotals": {
+    "grossPay": 20000.00,
+    "netPay": 15395.00,
+    "taxesWithheld": {
+      "federalIncomeTax": 2640.00,
+      "ficaSocialSecurity": 960.00,
+      "medicare": 225.00,
+      "stateIncomeTax": 780.00,
+      "totalTaxes": 4605.00
+    },
+    "deductions": {
+      "healthInsurance": 0.00,
+      "retirement401k": 0.00,
+      "other": 0.00
+    }
+  },
+  "payPeriods": 26,
+  "lastPayDate": "2024-12-15"
+}
