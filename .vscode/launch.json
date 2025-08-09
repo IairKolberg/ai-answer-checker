@@ -1,0 +1,48 @@
+{
+  // VS Code debug configurations for AI Answer Checker
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug All Tests - pay-details-us-agent",
+      "type": "python",
+      "request": "launch",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "module": "ai_answer_checker",
+      "args": [
+        "--agent", "pay-details-us-agent"
+      ],
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Debug Single Test - march_deduction",
+      "type": "python",
+      "request": "launch",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "module": "ai_answer_checker",
+      "args": [
+        "--agent", "pay-details-us-agent",
+        "--test", "march_deduction"
+      ],
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Attach to Debugpy (port 5678)",
+      "type": "python",
+      "request": "attach",
+      "connect": { "host": "localhost", "port": 5678 },
+      "justMyCode": true
+    }
+  ]
+}
+
+
