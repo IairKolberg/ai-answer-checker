@@ -1,10 +1,10 @@
-# AI Answer Checker
+# Payroll AI Checker
 
-A powerful regression testing framework for AI agents that validates responses against expected outputs using multiple comparison methods.
+A powerful regression testing framework for payroll AI agents that validates responses against expected outputs using multiple comparison methods.
 
 ## 🎯 What It Does
 
-The AI Answer Checker helps you:
+The Payroll AI Checker helps you:
 - **Test AI agent responses** automatically against expected outputs
 - **Prevent regressions** when updating AI models or prompts
 - **Validate response quality** using semantic, exact, and substring matching
@@ -43,7 +43,7 @@ pip install -r requirements.txt
 
 4. **Verify installation:**
 ```bash
-python3 -m ai_answer_checker --help
+python3 -m payroll_ai_checker --help
 ```
 
 5. **Run unit tests:**
@@ -55,34 +55,34 @@ python -m pytest unit_tests/ -v
 
 ### List Available Agents
 ```bash
-python3 -m ai_answer_checker --list-agents
+python3 -m payroll_ai_checker --list-agents
 ```
 
 ### Run All Tests
 ```bash
 # Test all tests for an agent
-python3 -m ai_answer_checker --agent pay-details-us-agent
+python3 -m payroll_ai_checker --agent pay-details-us-agent
 ```
 
 ### Run Single Test
 ```bash
 # Test a specific test case
-python3 -m ai_answer_checker --agent pay-details-us-agent --test base_salary_march_2025
+python3 -m payroll_ai_checker --agent pay-details-us-agent --test base_salary_march_2025
 ```
 
 ### Run Tests (Dry Run)
 ```bash
 # Validate configurations without making HTTP requests
-python3 -m ai_answer_checker --agent pay-details-us-agent --dry-run
+python3 -m payroll_ai_checker --agent pay-details-us-agent --dry-run
 
 # Dry run a single test
-python3 -m ai_answer_checker --agent pay-details-us-agent --test healthcheck --dry-run
+python3 -m payroll_ai_checker --agent pay-details-us-agent --test healthcheck --dry-run
 ```
 
 ### JSON Output (for CI/CD)
 ```bash
 # Machine-readable output
-python3 -m ai_answer_checker --agent pay-details-us-agent --format json
+python3 -m payroll_ai_checker --agent pay-details-us-agent --format json
 ```
 
 ## 🛠️ CLI Options
@@ -101,6 +101,8 @@ python3 -m ai_answer_checker --agent pay-details-us-agent --format json
 ### Stub Service Control
 - `--keep-stubs` - Keep stub service running after tests complete (for manual testing)
 - `--no-stubs` - Skip stub service entirely - test against real services (integration testing)
+- `--stubs-port PORT` - Port for the stub HTTP service (default: 9876)
+- `--stubs-host HOST` - Host for the stub HTTP service (default: 0.0.0.0)
 
 ### Output & Formatting
 - `--format FORMAT` - Output format (default: 'console')
@@ -117,44 +119,52 @@ python3 -m ai_answer_checker --agent pay-details-us-agent --format json
 ### Running All Tests
 ```bash
 # Run all tests for an agent
-python3 -m ai_answer_checker --agent pay-details-us-agent
+python3 -m payroll_ai_checker --agent pay-details-us-agent
 ```
 
 ### Running Single Tests
 ```bash
 # Run a specific test
-python3 -m ai_answer_checker --agent pay-details-us-agent --test base_salary_march_2025
+python3 -m payroll_ai_checker --agent pay-details-us-agent --test base_salary_march_2025
 
 # Run single test with dry-run
-python3 -m ai_answer_checker --agent pay-details-us-agent --test healthcheck --dry-run
+python3 -m payroll_ai_checker --agent pay-details-us-agent --test healthcheck --dry-run
 
 # Run single test with JSON output
-python3 -m ai_answer_checker --agent pay-details-us-agent --test why_net_lower --format json
+python3 -m payroll_ai_checker --agent pay-details-us-agent --test why_net_lower --format json
 ```
 
 ### Validation and Debugging
 ```bash
 # Dry run to see what requests would be sent
-python3 -m ai_answer_checker --agent pay-details-us-agent --dry-run
+python3 -m payroll_ai_checker --agent pay-details-us-agent --dry-run
 
 # List available agents
-python3 -m ai_answer_checker --list-agents
+python3 -m payroll_ai_checker --list-agents
 ```
 
 ### Stub Service Management
 ```bash
 # Keep stub service running for manual testing with Postman/curl
-python3 -m ai_answer_checker --agent pay-details-us-agent --test march_deduction --keep-stubs
+python3 -m payroll_ai_checker --agent pay-details-us-agent --test march_deduction --keep-stubs
 
 # Test against real services (no mocking) - useful for GitPod/integration testing
-python3 -m ai_answer_checker --agent pay-details-us-agent --test march_deduction --no-stubs
+python3 -m payroll_ai_checker --agent pay-details-us-agent --test march_deduction --no-stubs
+
+# Select stub service network settings (host/port)
+python3 -m payroll_ai_checker \
+  --agent pay-details-us-agent \
+  --test march_deduction \
+  --keep-stubs \
+  --stubs-host 127.0.0.1 \
+  --stubs-port 9999
 ```
 
 ## 📁 Project Structure
 
 ```
-ai-answer-checker/
-├── ai_answer_checker/              # Main package
+payroll-ai-checker/
+├── payroll_ai_checker/              # Main package
 │   ├── __init__.py
 │   ├── __main__.py                # Package entry point
 │   ├── cli.py                     # Command-line interface
@@ -410,11 +420,11 @@ required_words: ["Federal Income Tax", "$2,640.00", "total"]
 Generated as `reports/{agent-slug}_results_{timestamp}.csv`:
 
 ```csv
-test_name,test_type,status,similarity,error,expected_answer,actual_answer
-OVERALL_SUMMARY_pay_details_us_agent,summary,passed,100.0%,passed: 3/3,,
-healthcheck,exact,pass,1.000,,Service is healthy,HTTP 200 OK
-why_net_lower,semantic,pass,0.923,,Your net pay is lower due to...,Your net pay decreased because...
-yearly_tax_totals,substring,pass,1.000,,Federal Income Tax: $2640...,Based on your YTD records: Federal Income Tax: $2640...
+test_name,test_type,status,similarity,error,expected_answer,actual_answer,tools_used
+OVERALL_SUMMARY_pay_details_us_agent,summary,passed,100.0%,passed: 3/3,,,
+healthcheck,exact,pass,1.000,,Service is healthy,HTTP 200 OK,
+why_net_lower,semantic,pass,0.923,,Your net pay is lower due to...,Your net pay decreased because...,getPayDetails;getPayDetailsSummary
+yearly_tax_totals,substring,pass,1.000,,Federal Income Tax: $2640...,Based on your YTD records: Federal Income Tax: $2640...,getPayDetailsSummary
 ```
 
 **CSV Columns:**
@@ -425,6 +435,7 @@ yearly_tax_totals,substring,pass,1.000,,Federal Income Tax: $2640...,Based on yo
 - `error`: Error message if the test failed to execute
 - `expected_answer`: Expected response from test case (truncated to 200 characters)
 - `actual_answer`: Actual response from AI agent (truncated to 200 characters)
+- `tools_used`: Semicolon-separated list of tool/function names detected in the agent's `tool_calls_made`
 
 ### JSON Output Example
 ```json
@@ -479,7 +490,7 @@ jobs:
           STAGING_AI_URL: ${{ secrets.STAGING_AI_URL }}
           STAGING_AUTH_TOKEN: ${{ secrets.STAGING_AUTH_TOKEN }}
         run: |
-          python -m ai_answer_checker \
+          python -m payroll_ai_checker \
             --agent pay-details-us-agent \
             --format json
       
@@ -492,7 +503,12 @@ jobs:
 
 ## 🔧 Tool Stub Service
 
-The AI Answer Checker includes an integrated HTTP stub service that mocks tool endpoints for isolated testing:
+The Payroll AI Checker includes an integrated HTTP stub service that mocks tool endpoints for isolated testing.
+
+**Default Configuration:**
+- **Port:** 9876
+- **Host:** 0.0.0.0 (listens on all interfaces)
+- **URL:** http://localhost:9876
 
 ```bash
 # The stub service automatically runs on port 9876 and:
@@ -502,17 +518,17 @@ The AI Answer Checker includes an integrated HTTP stub service that mocks tool e
 # 4. Stops cleanly after tests complete
 
 # Keep stub service running for manual testing
-python3 -m ai_answer_checker --agent pay-details-us-agent --keep-stubs
+python3 -m payroll_ai_checker --agent pay-details-us-agent --keep-stubs
 
 # Skip stub service entirely (test against real services)
-python3 -m ai_answer_checker --agent pay-details-us-agent --no-stubs
+python3 -m payroll_ai_checker --agent pay-details-us-agent --no-stubs
 ```
 
 ### Stub Service Architecture
 
 ```
 ┌─────────────────────────────────────┐    ┌─────────────────────────────┐
-│        AI Answer Checker            │    │         AI Agent            │
+│        Payroll AI Checker            │    │         AI Agent            │
 │         (Test Runner)               │    │                             │
 │                                     │    │                             │
 │  1. Start stub HTTP service         │    │                             │
@@ -559,7 +575,7 @@ curl "http://localhost:9876/getPayDetailsSummary?employeeId=123456"
 #!/bin/bash
 echo "🧪 Running AI regression tests before deployment..."
 
-python -m ai_answer_checker \
+python -m payroll_ai_checker \
   --agent pay-details-us-agent \
   --format json > test-results.json
 
@@ -587,7 +603,7 @@ pipeline {
         stage('AI Regression Tests') {
             steps {
                 sh '''
-                    python -m ai_answer_checker \
+                    python -m payroll_ai_checker \
                         --agent pay-details-us-agent \
                         --format json
                 '''
@@ -733,7 +749,7 @@ The project includes pre-configured debug configurations in `.vscode/launch.json
 
 1. **🔴 Debug Single Test: march_deduction** - Debug with stubs (mocked dependencies)
 2. **🌐 Debug Single Test: march_deduction (No Stubs)** - Debug against real services  
-3. **Debug AI Answer Checker (All Tests)** - Debug all tests with stubs
+3. **Debug Payroll AI Checker (All Tests)** - Debug all tests with stubs
 
 **To debug:**
 1. Set breakpoints by clicking in the left margin  
@@ -747,7 +763,7 @@ The project includes pre-configured debug configurations in `.vscode/launch.json
 ```bash
 # Enable verbose logging
 export PYTHONPATH=.
-python -m ai_answer_checker --agent pay-details-us-agent --dry-run
+python -m payroll_ai_checker --agent pay-details-us-agent --dry-run
 
 # Check exit codes
 echo $?  # 0 = success, 1 = failure
@@ -765,31 +781,34 @@ pip install -r requirements.txt
 **"Agent test directory not found"**
 ```bash
 # Check agent name and directory structure
-python -m ai_answer_checker --list-agents
+python -m payroll_ai_checker --list-agents
 ls agent_tests/
 ```
 
 **"Connection refused" or AI Agent Down**
 ```bash
 # Use dry run mode to test without AI agent
-python -m ai_answer_checker --agent pay-details-us-agent --dry-run
+python -m payroll_ai_checker --agent pay-details-us-agent --dry-run
 
 # Test against real services (bypassing stubs) - useful for GitPod/cloud environments
-python -m ai_answer_checker --agent pay-details-us-agent --no-stubs
+python -m payroll_ai_checker --agent pay-details-us-agent --no-stubs
 ```
 
 **"YAML parsing errors" or malformed test files**
 - YAML parsing errors are now shown in test reports with detailed error messages
 - Check test file syntax with: `python -c "import yaml; yaml.safe_load(open('your_test.yaml'))"`
 
-**"Stub service port conflicts"**
+**"Stub service port conflicts" (Default port: 9876)**
 ```bash
-# If port 9876 is in use, kill the process or skip stubs entirely
+# If port 9876 is in use, use a different port
+python3 -m payroll_ai_checker --agent pay-details-us-agent --stubs-port 8080
+
+# Or find what's using the default port and kill it
 lsof -i :9876  # Find what's using the port
 kill -9 PID    # Kill the process using the port
 
 # Or skip stubs entirely for integration testing
-python -m ai_answer_checker.cli --agent pay-details-us-agent --no-stubs
+python3 -m payroll_ai_checker --agent pay-details-us-agent --no-stubs
 ```
 
 **"HTTP 500 errors" or truncated error messages**

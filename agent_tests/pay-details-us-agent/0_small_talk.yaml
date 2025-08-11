@@ -1,0 +1,11 @@
+variables: {}
+
+user_input: "What's your favorite color?"
+
+expected_answer: |
+  “Sorry, I’m unable to help with that, I’m here to help you understand your payslip.”
+
+comparison_method: exact
+
+# No tool stubs needed; agent should decline unrelated small talk with a fixed message.
+

@@ -1,6 +1,7 @@
 """Service for writing test reports to files in CSV format as specified in HLD."""
 
 import csv
+import json
 import logging
 from datetime import datetime, timezone
 from pathlib import Path
@@ -48,7 +49,7 @@ class ReportWriterService:
     def _write_csv_report(self, report: TestReport, include_summary: bool = True) -> Path:
         """Write CSV report as specified in HLD.
         
-        Format: test_name, test_type, status, similarity, error, expected_answer, actual_answer
+        Format: test_name, test_type, status, similarity, error, expected_answer, actual_answer, tools_used
         Filename: {agent_slug}_results_{YYYY-MM-DDTHH-MM-SSZ}.csv
         """
         # Generate timestamp in ISO format with UTC timezone
@@ -64,8 +65,17 @@ class ReportWriterService:
         with open(file_path, 'w', newline='', encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)
             
-            # Write header
-            writer.writerow(['test_name', 'test_type', 'status', 'similarity', 'error', 'expected_answer', 'actual_answer'])
+            # Write header (append tools_used for visibility of agent tool calls)
+            writer.writerow([
+                'test_name',
+                'test_type',
+                'status',
+                'similarity',
+                'error',
+                'expected_answer',
+                'actual_answer',
+                'tools_used'
+            ])
             
             # Add summary row if requested (as special test_name)
             if include_summary:
@@ -76,7 +86,8 @@ class ReportWriterService:
                     f"{report.pass_percentage:.1f}%",
                     f"passed: {report.passed}/{report.total_tests}",
                     "",  # empty expected_answer for summary
-                    ""   # empty actual_answer for summary
+                    "",  # empty actual_answer for summary
+                    ""   # empty tools_used for summary
                 ])
             
             # Write individual test results
@@ -109,6 +120,45 @@ class ReportWriterService:
                 expected_answer = expected_answer.replace('\n', ' ').replace('\r', ' ').strip()
                 actual_answer = actual_answer.replace('\n', ' ').replace('\r', ' ').strip()
                 
+                # Derive tools_used string from tool_calls_made (if present)
+                tools_used = ""
+                try:
+                    tool_calls = getattr(result, 'tool_calls_made', None)
+                    if tool_calls:
+                        extracted_names = []
+                        for call in tool_calls:
+                            name: str = ""
+                            if isinstance(call, dict):
+                                # Try common keys first
+                                for key in ["name", "tool", "tool_name", "type", "endpoint"]:
+                                    if key in call and isinstance(call[key], str) and call[key]:
+                                        name = call[key]
+                                        break
+                                # Try nested function structure (OpenAI-style)
+                                if not name and isinstance(call.get("function"), dict):
+                                    func_name = call["function"].get("name")
+                                    if isinstance(func_name, str) and func_name:
+                                        name = func_name
+                                # Fallbacks
+                                if not name:
+                                    name = call.get("path") or call.get("id") or ""
+                            if name:
+                                extracted_names.append(name)
+                        if extracted_names:
+                            # Preserve order, remove duplicates
+                            seen = set()
+                            ordered_unique = []
+                            for n in extracted_names:
+                                if n not in seen:
+                                    ordered_unique.append(n)
+                                    seen.add(n)
+                            tools_used = ";".join(ordered_unique)
+                        else:
+                            tools_used = json.dumps(tool_calls)[:200]
+                except Exception:
+                    # Be resilient: never break report writing due to tools parsing
+                    tools_used = ""
+                
                 writer.writerow([
                     result.test_name,
                     test_type,
@@ -116,7 +166,8 @@ class ReportWriterService:
                     similarity,
                     error_message,
                     expected_answer,
-                    actual_answer
+                    actual_answer,
+                    tools_used
                 ])
         
         return file_path

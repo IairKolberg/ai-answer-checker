@@ -1,0 +1,29 @@
+{
+  "payDetailsId": 3000020,
+  "hourlyRate": 28.00,
+  "hoursWorked": 80,
+  "payPeriodStartDate": "2025-03-29T00:00:00",
+  "payPeriodEndDate": "2025-04-11T23:59:59",
+  "grossPay": 2240.00,
+  "taxes": {
+    "federalIncomeTax": 130.00,
+    "socialSecurity": 138.88,
+    "medicare": 32.48,
+    "stateIncomeTax": 102.00,
+    "state": "OR",
+    "totalTaxes": 403.36
+  },
+  "deductions": {
+    "preTax": {
+      "medicalInsurance": 75.00
+    },
+    "postTax": {
+      "charityDonation": 20.00
+    },
+    "totalDeductions": 75.00,
+    "totalPostTax": 20.00
+  },
+  "netPay": 1741.64
+}
+
+

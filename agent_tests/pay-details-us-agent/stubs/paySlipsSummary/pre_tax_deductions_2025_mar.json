@@ -1,0 +1,30 @@
+[
+  {
+    "year": 2025,
+    "months": [
+      {
+        "displayName": "March",
+        "cycles": [
+          {
+            "payDetailsStatus": { "status": "success", "errorMessage": null, "validationErrorMessage": null },
+            "payDate": "2025-03-28T00:00:00",
+            "payPeriodStartDate": "2025-03-15T00:00:00",
+            "payPeriodEndDate": "2025-03-28T23:59:59",
+            "checkDateName": "March 28",
+            "paySummaryDetails": { "id": 3000012, "totalNetPay": 1739.01, "currency": "USD" }
+          },
+          {
+            "payDetailsStatus": { "status": "success", "errorMessage": null, "validationErrorMessage": null },
+            "payDate": "2025-03-14T00:00:00",
+            "payPeriodStartDate": "2025-03-01T00:00:00",
+            "payPeriodEndDate": "2025-03-14T23:59:59",
+            "checkDateName": "March 14",
+            "paySummaryDetails": { "id": 3000011, "totalNetPay": 1543.35, "currency": "USD" }
+          }
+        ]
+      }
+    ]
+  }
+]
+
+

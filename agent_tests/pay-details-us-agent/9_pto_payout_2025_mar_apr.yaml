@@ -1,0 +1,33 @@
+variables:
+  employeeId: "E90009"
+  currentPayDetailsId: 3000024
+
+user_input: "Why wasn’t health insurance deducted this period?"
+
+expected_answer: |
+  I'm not sure. For more information, please contact your HR or Payroll contact.
+
+comparison_method: exact
+
+tool_stubs:
+  getPayDetails:
+    - request:
+        payDetailsId: 3000024
+      method: GET
+      path_template: "/{payDetailsId}"
+      response_file: payslips/3000024.json
+
+    - request:
+        payDetailsId: 3000023
+      method: GET
+      path_template: "/{payDetailsId}"
+      response_file: payslips/3000023.json
+
+  getPayDetailsSummary:
+    - request:
+        employeeId: "E90009"
+      method: GET
+      path_template: "/employees/{employeeId}/summary"
+      response_file: paySlipsSummary/pto_payout_2025_mar_apr.json
+
+

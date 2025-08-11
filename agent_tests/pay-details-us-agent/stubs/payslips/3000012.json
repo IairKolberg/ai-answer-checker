@@ -1,0 +1,25 @@
+{
+  "payDetailsId": 3000012,
+  "payPeriodStartDate": "2025-03-15T00:00:00",
+  "payPeriodEndDate": "2025-03-28T23:59:59",
+  "grossPay": 2384.62,
+  "taxes": {
+    "federalIncomeTax": 147.00,
+    "socialSecurity": 132.78,
+    "medicare": 31.05,
+    "stateIncomeTax": 66.00,
+    "state": "CA",
+    "sdi": 25.70,
+    "totalTaxes": 402.53
+  },
+  "deductions": {
+    "preTax": {
+      "retirement401k": 143.08,
+      "healthInsurance": 100.00
+    },
+    "totalDeductions": 243.08
+  },
+  "netPay": 1739.01
+}
+
+

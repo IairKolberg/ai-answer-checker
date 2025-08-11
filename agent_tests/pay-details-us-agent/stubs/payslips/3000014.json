@@ -1,0 +1,27 @@
+{
+  "payDetailsId": 3000014,
+  "payPeriodStartDate": "2025-03-29T00:00:00",
+  "payPeriodEndDate": "2025-04-11T23:59:59",
+  "grossPay": 3076.92,
+  "taxes": {
+    "federalIncomeTax": 240.00,
+    "socialSecurity": 190.96,
+    "medicare": 44.10,
+    "stateIncomeTax": 116.15,
+    "totalTaxes": 591.21
+  },
+  "deductions": {
+    "preTax": {
+      "retirement401k": 123.08,
+      "commuterTransit": 50.00
+    },
+    "postTax": {
+      "gymReimbursement": 25.00
+    },
+    "totalDeductions": 173.08,
+    "totalPostTax": 25.00
+  },
+  "netPay": 2287.63
+}
+
+

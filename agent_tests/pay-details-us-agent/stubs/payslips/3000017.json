@@ -1,0 +1,26 @@
+{
+  "payDetailsId": 3000017,
+  "location": "Denver, CO",
+  "payPeriodStartDate": "2025-03-15T00:00:00",
+  "payPeriodEndDate": "2025-03-28T23:59:59",
+  "grossPay": 2769.23,
+  "taxes": {
+    "federalIncomeTax": 165.00,
+    "socialSecurity": 171.69,
+    "medicare": 40.34,
+    "stateIncomeTax": 112.06,
+    "state": "CO",
+    "totalTaxes": 489.09
+  },
+  "deductions": {
+    "preTax": {
+      "medicalInsurance": 125.00,
+      "retirement401k": 138.46
+    },
+    "postTax": {},
+    "totalDeductions": 263.46
+  },
+  "netPay": 2155.14
+}
+
+

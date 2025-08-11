@@ -1,3 +1,0 @@
-test_name,test_type,status,similarity,error,expected_answer,actual_answer
-OVERALL_SUMMARY_pay-details-us-agent,summary,failed,0.0%,passed: 0/1,,
-march_deduction,semantic,fail,0.439,,"On your March 7, 2025 payslip, your deduction is labeled as 401k Contribution: $51.80. This is a pre-tax retirement savings deduction, meaning the amount was set aside from your pay before taxes were calculated.","Your last salary, as of the pay period ending15 December2024, was a **gross pay of $20,000.00** with a **net pay of $15,395.00** after taxes and deductions. This means your take-home pay after withholding includes federal income tax, Social Security, Medicare, and state income tax. If you need details on specific deductions or taxes withheld, feel free to ask!"

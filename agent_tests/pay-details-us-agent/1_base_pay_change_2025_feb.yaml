@@ -1,0 +1,34 @@
+variables:
+  employeeId: "E10001"
+  currentPayDetailsId: 3000010
+
+user_input: "Why is my net pay higher this period?"
+
+expected_answer: |
+  Your net pay is higher this period because your gross pay increased significantly compared to the previous pay period. Gross pay rose from $1,200.00 to $2,346.15 (+$1,146.15), which led to higher tax withholdings across the board (federal, state, Social Security, and Medicare). There are no benefits deductions or reimbursements in this period, so all reductions are taxes.
+
+semantic_threshold: 0.80
+comparison_method: semantic
+
+tool_stubs:
+  getPayDetails:
+    - request:
+        payDetailsId: 3000010
+      method: GET
+      path_template: "/{payDetailsId}"
+      response_file: payslips/3000010.json
+
+    - request:
+        payDetailsId: 3000009
+      method: GET
+      path_template: "/{payDetailsId}"
+      response_file: payslips/3000009.json
+
+  getPayDetailsSummary:
+    - request:
+        employeeId: "E10001"
+      method: GET
+      path_template: "/employees/{employeeId}/summary"
+      response_file: paySlipsSummary/base_pay_change_2025_feb.json
+
+

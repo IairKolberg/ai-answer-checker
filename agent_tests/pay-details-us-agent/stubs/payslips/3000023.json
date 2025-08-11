@@ -1,0 +1,28 @@
+{
+  "payDetailsId": 3000023,
+  "payPeriodStartDate": "2025-03-15T00:00:00",
+  "payPeriodEndDate": "2025-03-28T23:59:59",
+  "grossPay": 2500.00,
+  "taxes": {
+    "federalIncomeTax": 185.00,
+    "socialSecurity": 155.00,
+    "medicare": 36.25,
+    "stateIncomeTax": 102.00,
+    "state": "OR",
+    "totalTaxes": 478.25
+  },
+  "deductions": {
+    "preTax": {
+      "retirement401k": 126.92,
+      "healthInsurance": 100.00
+    },
+    "postTax": {
+      "unionDues": 15.00
+    },
+    "totalDeductions": 226.92,
+    "totalPostTax": 15.00
+  },
+  "netPay": 1906.75
+}
+
+

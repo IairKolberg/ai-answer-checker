@@ -1,0 +1,25 @@
+{
+  "payDetailsId": 3000015,
+  "payPeriodStartDate": "2025-03-15T00:00:00",
+  "payPeriodEndDate": "2025-03-28T23:59:59",
+  "grossPay": 2615.38,
+  "taxes": {
+    "federalIncomeTax": 155.00,
+    "socialSecurity": 162.15,
+    "medicare": 37.47,
+    "stateIncomeTax": 111.45,
+    "state": "GA",
+    "totalTaxes": 466.07
+  },
+  "deductions": {
+    "preTax": {
+      "hsaContribution": 75.00,
+      "dentalInsurance": 25.00
+    },
+    "postTax": {},
+    "totalDeductions": 100.00
+  },
+  "netPay": 2049.31
+}
+
+

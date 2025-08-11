@@ -1,0 +1,25 @@
+{
+  "payDetailsId": 3000021,
+  "payPeriodStartDate": "2025-03-15T00:00:00",
+  "payPeriodEndDate": "2025-03-28T23:59:59",
+  "grossPay": 3461.54,
+  "taxes": {
+    "federalIncomeTax": 130.00,
+    "socialSecurity": 138.88,
+    "medicare": 32.48,
+    "stateIncomeTax": 102.00,
+    "state": "OR",
+    "totalTaxes": 403.36
+  },
+  "deductions": {
+    "preTax": {
+      "visionInsurance": 30.00,
+      "retirement401k": 126.92
+    },
+    "postTax": {},
+    "totalDeductions": 156.92
+  },
+  "netPay": 2719.02
+}
+
+

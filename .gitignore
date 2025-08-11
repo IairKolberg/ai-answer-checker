@@ -5,6 +5,9 @@ __pycache__/
 
 # C extensions
 *.so
+.context/
+.ai-context/
+reports/
 
 # Distribution / packaging
 .Python

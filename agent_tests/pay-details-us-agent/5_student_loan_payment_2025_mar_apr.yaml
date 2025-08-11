@@ -1,0 +1,34 @@
+variables:
+  employeeId: "E50005"
+  currentPayDetailsId: 3000016
+
+user_input: "Why was I charged $160 after taxes this pay period?"
+
+expected_answer: |
+  You were charged $160 after taxes because a new post-tax deduction labeled "Student Loan Payment" was applied this period. Your gross pay and pre-tax deductions (HSA and Dental) are unchanged from the previous period, and taxes stayed the same. The $160 post-tax item directly reduced your net pay this period compared to last period.
+
+semantic_threshold: 0.80
+comparison_method: semantic
+
+tool_stubs:
+  getPayDetails:
+    - request:
+        payDetailsId: 3000016
+      method: GET
+      path_template: "/{payDetailsId}"
+      response_file: payslips/3000016.json
+
+    - request:
+        payDetailsId: 3000015
+      method: GET
+      path_template: "/{payDetailsId}"
+      response_file: payslips/3000015.json
+
+  getPayDetailsSummary:
+    - request:
+        employeeId: "E50005"
+      method: GET
+      path_template: "/employees/{employeeId}/summary"
+      response_file: paySlipsSummary/student_loan_2025_mar_apr.json
+
+

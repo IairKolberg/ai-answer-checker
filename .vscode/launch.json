@@ -19,27 +19,21 @@
       "justMyCode": true
     },
     {
-      "name": "Debug Single Test - march_deduction",
+      "name": "Debug Single Test - why_net_higher_bonus_period",
       "type": "python",
       "request": "launch",
       "python": "${workspaceFolder}/.venv/bin/python",
       "module": "ai_answer_checker",
       "args": [
         "--agent", "pay-details-us-agent",
-        "--test", "march_deduction"
+        "--test", "why_net_higher_bonus_period",
+        "--stubs-port", "9493"
       ],
       "cwd": "${workspaceFolder}",
       "env": {
         "PYTHONPATH": "${workspaceFolder}"
       },
       "console": "integratedTerminal",
-      "justMyCode": true
-    },
-    {
-      "name": "Attach to Debugpy (port 5678)",
-      "type": "python",
-      "request": "attach",
-      "connect": { "host": "localhost", "port": 5678 },
       "justMyCode": true
     }
   ]

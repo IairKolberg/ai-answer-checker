@@ -1,0 +1,22 @@
+{
+  "payDetailsId": 3000009,
+  "payPeriodStartDate": "2025-02-01T00:00:00",
+  "payPeriodEndDate": "2025-02-14T23:59:59",
+  "grossPay": 1200.00,
+  "taxes": {
+    "federalIncomeTax": 74.00,
+    "socialSecurity": 74.40,
+    "medicare": 17.40,
+    "stateIncomeTax": 6.00,
+    "state": "CA",
+    "sdi": 0.00,
+    "totalTaxes": 171.80
+  },
+  "deductions": {
+    "benefits": [],
+    "totalDeductions": 0.00
+  },
+  "netPay": 1028.20
+}
+
+

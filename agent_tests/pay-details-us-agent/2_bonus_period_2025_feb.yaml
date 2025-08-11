@@ -1,0 +1,34 @@
+variables:
+  employeeId: "E20002"
+  currentPayDetailsId: 3000010
+
+user_input: "Why is my net pay much higher than usual this period?"
+
+expected_answer: |
+  Your net pay is much higher this period because an additional pay item (such as a one-time bonus) raised your total gross pay. While your regular pay stayed comparable to last period, the extra earnings increased taxable wages, which led to higher federal and FICA withholdings. There are no new pre-tax deductions in this period, so the change is primarily due to the additional pay and the resulting tax withholding.
+
+semantic_threshold: 0.80
+comparison_method: semantic
+
+tool_stubs:
+  getPayDetails:
+    - request:
+        payDetailsId: 3000010
+      method: GET
+      path_template: "/{payDetailsId}"
+      response_file: payslips/3000010.json
+
+    - request:
+        payDetailsId: 3000009
+      method: GET
+      path_template: "/{payDetailsId}"
+      response_file: payslips/3000009.json
+
+  getPayDetailsSummary:
+    - request:
+        employeeId: "E20002"
+      method: GET
+      path_template: "/employees/{employeeId}/summary"
+      response_file: paySlipsSummary/bonus_period_2025_feb.json
+
+

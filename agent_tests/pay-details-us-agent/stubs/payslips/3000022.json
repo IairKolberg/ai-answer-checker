@@ -1,0 +1,27 @@
+{
+  "payDetailsId": 3000022,
+  "payPeriodStartDate": "2025-03-29T00:00:00",
+  "payPeriodEndDate": "2025-04-11T23:59:59",
+  "regularPay": 3461.54,
+  "companyCarBIK": 300.00,
+  "grossPay": 3761.54,
+  "taxes": {
+    "federalIncomeTax": 200.00,
+    "socialSecurity": 233.67,
+    "medicare": 54.56,
+    "stateIncomeTax": 149.00,
+    "state": "OR",
+    "totalTaxes": 637.23
+  },
+  "deductions": {
+    "preTax": {
+      "visionInsurance": 30.00,
+      "retirement401k": 126.92
+    },
+    "postTax": {},
+    "totalDeductions": 156.92
+  },
+  "netPay": 2967.40
+}
+
+
